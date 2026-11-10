@@ -1,6 +1,6 @@
 # 科研论文写作工作流（Paper Workflow Skills）
 
-一套把"写论文"拆成可核对状态机的技能集合：18 个技能 + 12 个登记册模板，覆盖从立项清点、证据锁定、正文起草、语言校准、模拟审稿到投稿审计的全过程。适用于 Claude Skills / Codex Skills 这类以 `SKILL.md` 为入口的智能体环境。
+一套把"写论文"拆成可核对状态机的技能集合：19 个技能（18 个自写 + 1 个第三方）+ 12 个登记册模板，覆盖从立项清点、证据锁定、正文起草、语言校准、模拟审稿到投稿审计的全过程。适用于 Claude Skills / Codex Skills 这类以 `SKILL.md` 为入口的智能体环境。
 
 核心主张：**模型不替你决定科学结论，只负责让每个数字有来源、每句结论有强度、每次修改有痕迹。**
 
@@ -62,7 +62,7 @@
 
 ```
 sci-writing-workflow/
-├─ skills/                     # 18 个技能，各自含 SKILL.md
+├─ skills/                     # 18 个自写技能，各自含 SKILL.md
 │  └─ paper-workflow/
 │     ├─ references/           # 模块契约、来源整合、语言层组合契约、段落证据计划
 │     └─ scripts/check_gates.py  # 只读状态报告
