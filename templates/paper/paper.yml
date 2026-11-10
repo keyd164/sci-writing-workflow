@@ -1,0 +1,29 @@
+# 论文基本信息
+title_candidates:
+  - "在此填入标题候选 1"
+  - "在此填入标题候选 2"
+title_selected: null
+
+authors: []
+corresponding: null
+
+# 研究问题（与 claims.yml 的 Q/C-id 对应）
+research_questions:
+  - id: Q1
+    text: "一句话写清本研究回答什么问题"
+    type: descriptive   # descriptive | association | counterfactual | scenario
+  - id: Q2
+    text: "第二研究问题"
+    type: association
+
+# 论文形态
+article_type: original_research   # original_research | brief_report | review
+structure: IMRaD                  # 按目标期刊实际结构填写
+
+# 目标期刊（slug 与 journal.yml 对应）
+target_journal: null
+backup_journals: []
+
+# 项目约定
+language: en
+project_root_note: "正文、证据、图件与 audits/ 的相对位置说明"

@@ -1,0 +1,44 @@
+# 结论登记册。strength 决定措辞上限，不要写超出强度的动词。
+# strength: descriptive | association | counterfactual | scenario | interpretation
+
+global_language_lock:
+  # 本研究中不得使用的表述（逐字列出），命中即需改写
+  forbidden: []
+  # 允许并需一致的表述
+  preferred:
+    - "associated with"
+    - "conditional contrast"
+
+claims:
+  - id: C01
+    question: Q1
+    text: "用一句话写出结论，不写成段落"
+    strength: association
+    evidence: [R01, R02]        # 必须都在 results.yml 中且 verified
+    figures: [F1]
+    tables: []
+    language_lock:
+      forbidden: ["caused", "led to", "resulted in"]
+      allowed: ["was associated with", "higher/lower than"]
+    status: draft               # draft | locked | retired
+    notes: ""
+
+  - id: C02
+    question: Q2
+    text: "第二条结论"
+    strength: counterfactual
+    evidence: [R03]
+    figures: [F2]
+    tables: []
+    language_lock:
+      forbidden: ["proves", "attributable deaths"]
+      allowed: ["potentially attributable", "under the counterfactual"]
+    status: draft
+    notes: ""
+
+# 与摘要/结论的对应，避免正文有、摘要漏或反之
+abstract_coverage:
+  - claim: C01
+    locations: ["abstract", "results", "conclusion"]
+  - claim: C02
+    locations: ["results", "discussion"]

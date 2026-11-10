@@ -1,0 +1,26 @@
+# 文献登记册。三层核验状态分开记，不用一个 verified 掩盖未完成层级。
+references:
+  - key: author2024topic
+    authors: "Author A, Author B"
+    title: ""
+    journal: ""
+    year: 2024
+    doi: "10.xxxx/xxxxx"
+    version: published        # published | preprint | erratum | retracted
+    used_for: [C01]           # 支撑哪些结论
+    local_status: ok          # ok | missing | duplicate | placeholder
+    identity_status: unverified  # verified | unverified | mismatch
+    support_status: unverified   # verified | partial | unsupported | unverified
+    checked_url: null
+    checked_on: null
+    support_note: "支持到哪一句，哪些没有覆盖"
+
+# 正文与补充材料分开编号时，在此写明序列规则
+numbering:
+  main_text: "从 1 起连续编号"
+  supplement: "从 1 起独立编号"
+  master_list: "去重后的完整来源清单"
+
+# 无法获取全文时的覆盖说明
+coverage_limits:
+  - "仅摘要可见的条目：列出 key"

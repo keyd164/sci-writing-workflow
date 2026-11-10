@@ -1,0 +1,30 @@
+# 图与证据绑定。图注、Results 与这里的绑定必须一致。
+figures:
+  - id: F1
+    title: "短标题：整图讲什么"
+    claim: C01                # 主导结论，一张图只服务一个主结论
+    placement: main           # main | supplement
+    panels:
+      - id: a
+        shows: "该 panel 展示的量"
+        evidence: [R01]
+        comparison: "谁和谁比、谁减谁"
+        sample: "n 的口径（国家年/个体/独立重复）"
+        uncertainty: "误差线含义：CI / SD / 模型范围"
+        units: ""
+      - id: b
+        shows: ""
+        evidence: [R02]
+        comparison: ""
+        sample: ""
+        uncertainty: ""
+        units: ""
+    legend_status: draft      # draft | reviewed | final
+    source_data: "figures/source_data/F1.csv"
+    notes: "缩放、对数轴、截断等会改变解读的设置"
+
+# 图表总量与期刊限制的对照，超限时给出转补充材料的优先级
+allocation:
+  main_figures_max: null
+  main_tables_max: null
+  overflow_policy: "按证据重要性排序，方法学定义类优先转补充材料"

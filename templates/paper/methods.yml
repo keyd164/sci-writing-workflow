@@ -1,0 +1,33 @@
+# 方法登记册。Results 里出现的每个模型都要能在这里找到定义。
+methods:
+  - id: M-PRIMARY
+    name: "主模型"
+    design: "例如：固定效应面板回归 / 队列分析 / 情景模拟"
+    outcome: "结局变量定义与单位"
+    exposure: "暴露变量、时间窗口、单位"
+    sample: "纳入排除规则与最终样本量"
+    covariates: []
+    inference: "聚类层级、自由度算法、稳健标准误类型"
+    mandatory_sentences:
+      - "必须逐字出现在 Methods 中的方法学限定句"
+    software: "软件与版本"
+    status: defined          # defined | planned | retired
+
+  - id: M-SENS
+    name: "敏感性分析"
+    design: ""
+    outcome: ""
+    exposure: ""
+    sample: ""
+    covariates: []
+    inference: ""
+    mandatory_sentences: []
+    software: ""
+    status: planned
+
+# 每个模型允许报告的数值指标，供 statistical-results-lock 核对
+reporting_contract:
+  point_estimate: true
+  ci: true
+  p_value: optional          # true | false | optional
+  units_note: "所有率的分母统一为 per 100,000 人年"

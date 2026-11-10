@@ -1,0 +1,26 @@
+# 术语与呈现格式。语言层与对齐检查都以这里为准。
+terms:
+  - term: "exposure metric"
+    definition: "在本研究中的确切含义与单位"
+    do_not_use: ["近义词 1", "近义词 2"]
+  - term: "study population"
+    definition: ""
+    do_not_use: []
+
+abbreviations:
+  - short: "CI"
+    long: "confidence interval"
+    first_use: "正文首次出现处定义"
+
+number_format:
+  decimals: 2
+  thousands_separator: ","
+  percent_style: "保留两位小数并写 %"
+  units: "per 100,000"
+  range_style: "用 en dash，不用 hyphen"
+
+spelling: en-GB          # en-GB | en-US，须与 journal.yml 一致
+tense_convention:
+  methods: past
+  results: past
+  discussion: mixed

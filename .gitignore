@@ -1,0 +1,15 @@
+# 运行产物
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# 本地产物
+*.log
+.venv/
+venv/
+
+# 私有论文项目不应进入本仓库
+.paper/
+manuscript/
+audits/

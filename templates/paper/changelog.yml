@@ -1,0 +1,20 @@
+# 变更日志。只记实质修改；工具升级、格式转换不记成论文进展。
+changelog:
+  - date: 2026-01-01
+    module: paper-bootstrap
+    action: "建立 .paper/ 与登记册初版"
+    files: [".paper/paper.yml", ".paper/workflow.yml"]
+    gates_affected: []
+    note: ""
+
+  - date: 2026-01-02
+    module: evidence-lock
+    action: "R01–R05 绑定来源并核验"
+    files: [".paper/results.yml"]
+    gates_affected: [G2]
+    note: "R04 源文件缺失，标 verified: false"
+
+# 约定
+# - module 写实际执行模块名，不写“AI 助手”
+# - files 写相对项目根的路径
+# - gates_affected 只在确实改变了门控材料时填写

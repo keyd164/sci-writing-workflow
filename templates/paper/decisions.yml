@@ -1,0 +1,32 @@
+# 决策日志。锁定后不得由模块擅自修改；新决策追加而非覆盖。
+# status: proposed | locked | superseded
+
+decisions:
+  - id: D01
+    status: locked
+    date: 2026-01-01
+    topic: "研究设计"
+    decision: "采用什么设计、为什么"
+    consequences: "对推断范围、措辞与图表的限制"
+    supersedes: null
+
+  - id: D02
+    status: locked
+    date: 2026-01-01
+    topic: "主要结局与暴露口径"
+    decision: ""
+    consequences: ""
+    supersedes: null
+
+  - id: D03
+    status: proposed
+    topic: "不确定性呈现"
+    decision: "区间类型与是否报告 p 值"
+    consequences: ""
+    supersedes: null
+
+# 被锁定的决策仍然可以被审计质疑，但不能被模块绕过。
+open_questions:
+  - id: QD01
+    question: "待作者决定的问题"
+    blocking: false

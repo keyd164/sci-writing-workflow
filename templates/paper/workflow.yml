@@ -1,0 +1,80 @@
+# 阶段与门控。此文件是唯一的阶段状态来源。
+# status: not_started | in_progress | pending_approval | blocked | completed
+# 门控 status: pending | approved（approved 只能由作者填写）
+
+stages:
+  - id: bootstrap
+    name: 项目清点与登记册建立
+    status: not_started
+  - id: architecture
+    name: 问题—主张—证据架构
+    status: not_started
+    gate_id: G1
+  - id: evidence_lock
+    name: 数字绑定与证据锁定
+    status: not_started
+    gate_id: G2
+  - id: drafting
+    name: 正文起草
+    status: not_started
+    blocked_by: [G2]
+  - id: alignment
+    name: 方法—结果双向对齐
+    status: not_started
+    gate_id: G3
+  - id: prose
+    name: 语言层校准
+    status: not_started
+    blocked_by: [G3]
+  - id: red_team
+    name: 模拟同行评审
+    status: not_started
+  - id: revision
+    name: 按意见修订
+    status: not_started
+    gate_id: G4
+  - id: journal_fit
+    name: 期刊适配
+    status: not_started
+  - id: submission
+    name: 投稿前审计
+    status: not_started
+    gate_id: G5
+  - id: release
+    name: 提交与发布授权
+    status: not_started
+    gate_id: G6
+
+gates:
+  - id: G1
+    name: 架构批准
+    status: pending
+    approved_by: null
+    approved_on: null
+  - id: G2
+    name: 证据锁定
+    status: pending
+    approved_by: null
+    approved_on: null
+  - id: G3
+    name: 对齐批准
+    status: pending
+    approved_by: null
+    approved_on: null
+  - id: G4
+    name: 意见处置
+    status: pending
+    approved_by: null
+    approved_on: null
+  - id: G5
+    name: 投稿审计通过
+    status: pending
+    approved_by: null
+    approved_on: null
+  - id: G6
+    name: 提交授权
+    status: pending
+    approved_by: null
+    approved_on: null
+
+notes: {}

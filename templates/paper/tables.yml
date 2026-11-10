@@ -1,0 +1,22 @@
+# 表与证据绑定。
+tables:
+  - id: T1
+    title: ""
+    claim: C01
+    placement: main           # main | supplement
+    columns:
+      - header: "变量"
+        source: "results.yml R-id 或 methods.yml M-id"
+      - header: "估计值 (95% CI)"
+        source: "R01"
+    footnotes:
+      - "注明单位、样本口径、模型设定与缩写"
+    numerical_consistency: "与正文、图注中的同一数值必须一致"
+    status: draft             # draft | reviewed | final
+
+# 表内派生行（如差值、百分比变化）需写明公式
+derived_rows:
+  - table: T1
+    row: "变化幅度"
+    formula: "(R01 - R02) / R02"
+    inputs: [R01, R02]

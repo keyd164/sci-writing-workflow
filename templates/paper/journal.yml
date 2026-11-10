@@ -1,0 +1,54 @@
+# 目标期刊规则。只有核验过的字段才能用于宣称合规。
+slug: target-journal
+name: "期刊全名"
+publisher: ""
+author_guidelines_url: ""
+checked_on: null
+
+fields:
+  article_type:
+    value: original_research
+    status: unverified       # verified | unverified
+    source: null
+  structure:
+    value: IMRaD
+    status: unverified
+    source: null
+  word_limit:
+    value: null
+    status: unverified
+    source: null
+  abstract_limit:
+    value: null
+    status: unverified
+    source: null
+  abstract_structure:
+    value: null
+    status: unverified
+    source: null
+  reference_style:
+    value: null                # numbered | author-year
+    status: unverified
+    source: null
+  figure_limit:
+    value: null
+    status: unverified
+    source: null
+  supplement_policy:
+    value: null
+    status: unverified
+    source: null
+  data_availability:
+    value: null
+    status: unverified
+    source: null
+  code_availability:
+    value: null
+    status: unverified
+    source: null
+  reporting_guideline:
+    value: null                # STROBE | GATHER | PRISMA | 其他
+    status: unverified
+    source: null
+
+notes: "unverified 字段一律进入 submission-audit 的阻塞项"

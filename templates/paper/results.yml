@@ -1,0 +1,37 @@
+# 数字登记册。每个进入正文/图表/摘要的数字都必须有 R-id。
+# verified: true（已对照来源）| pending（待核）| false（找不到来源，不得进入正文）
+
+results:
+  - id: R01
+    label: "主模型主效应"
+    value: 0.0
+    unit: "per unit exposure"     # 写清分母与量纲
+    model: M-PRIMARY
+    sample: "样本口径，例如 N 个国家年"
+    ci_low: null
+    ci_high: null
+    p_value: null
+    source_file: "results/primary.csv"   # 相对项目根
+    source_locator: "row 12, column estimate"
+    verified: pending
+    notes: "跨零区间要原样保留，不四舍五入掩盖"
+
+  - id: R02
+    label: "敏感性分析"
+    value: 0.0
+    unit: ""
+    model: M-SENS
+    sample: ""
+    source_file: "results/sensitivity.csv"
+    source_locator: ""
+    verified: pending
+    notes: ""
+
+# 派生量必须写清公式与输入，便于重算
+derived:
+  - id: R03
+    label: "由 R01、R02 计算的差值"
+    formula: "R01 - R02"
+    inputs: [R01, R02]
+    rounding: "保留两位小数"
+    verified: pending
