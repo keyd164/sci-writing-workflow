@@ -1,0 +1,35 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install --quiet pyyaml
+      - name: Repository structure check
+        run: python scripts/check_repo.py
+      - name: Gate report smoke test
+        run: |
+          mkdir -p /tmp/paper-check/.paper
+          cp templates/paper/*.yml /tmp/paper-check/.paper/
+          python skills/paper-workflow/scripts/check_gates.py /tmp/paper-check
+      - name: Reject private project traces
+        run: |
+          if grep -rniE "heat-cvd|swoonyiris|keyd164|D:\\\\" --include="*.md" --include="*.yml" --include="*.py" . \
+               --exclude-dir=third_party --exclude-dir=.git; then
+            echo "发现疑似私有项目痕迹，请检查"
+            exit 1
+          fi
