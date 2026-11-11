@@ -58,30 +58,12 @@ def check_templates() -> None:
                 errors.append(f"stage {stage['id']}: blocked_by 引用了未知门 {dep}")
 
 
-def check_site() -> None:
-    cfg = ROOT / "site" / "_config.yml"
-    if not cfg.is_file():
-        errors.append("site/_config.yml 缺失")
-    else:
-        data = yaml.safe_load(cfg.read_text(encoding="utf-8"))
-        if not data.get("theme"):
-            errors.append("site/_config.yml 未设置 theme")
-    posts = sorted((ROOT / "site" / "_posts").glob("*.md"))
-    if not posts:
-        errors.append("site/_posts 下没有文章")
-    for p in posts:
-        text = p.read_text(encoding="utf-8")
-        m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
-        if not m:
-            errors.append(f"{p.name}: 缺少 front matter，Pages 不会渲染")
-            continue
-        fm = yaml.safe_load(m.group(1))
-        for key in ("layout", "title", "date"):
-            if key not in fm:
-                errors.append(f"{p.name}: front matter 缺少 {key}")
-        body = text[m.end():]
-        if re.search(r"\{[{%]", body):
-            errors.append(f"{p.name}: 正文含 Liquid 标记，需用 raw 包裹")
+def check_scope() -> None:
+    """本仓库只承载技能与模板；博客站点已迁到 keyd164.github.io 仓库。"""
+    if (ROOT / "site").exists():
+        errors.append("site/ 应已迁出本仓库，博客站点在 keyd164.github.io 仓库维护")
+    if (ROOT / ".github" / "workflows" / "pages.yml").exists():
+        errors.append("pages.yml 应已移除，本仓库不再负责站点部署")
 
 
 def check_links() -> None:
@@ -107,14 +89,14 @@ def check_workflows() -> None:
 
 
 def main() -> int:
-    for fn in (check_skills, check_templates, check_site, check_links, check_workflows):
+    for fn in (check_skills, check_templates, check_scope, check_links, check_workflows):
         fn()
     if errors:
         print("结构自检失败：")
         for e in errors:
             print(" -", e)
         return 1
-    print("结构自检通过：18 个技能、12 个模板、站点文章与相对链接均正常")
+    print("结构自检通过：18 个技能、12 个模板、仓库边界与相对链接均正常")
     return 0
 
 

@@ -2,6 +2,15 @@
 
 格式参考 Keep a Changelog，版本号遵循语义化版本。
 
+## [1.2.0] - 2026-11-11
+
+### 变更
+
+- 博客站点迁出到独立仓库 `keyd164.github.io`，站点地址变为 `https://keyd164.github.io/`，不再使用带仓库名的项目页路径。
+- 移除本仓库的 `site/` 与 `.github/workflows/pages.yml`，本仓库只承载技能、模板与文档。
+- `scripts/check_repo.py` 的站点检查改为仓库边界检查：出现 `site/` 或 `pages.yml` 即报错。
+- `docs/publishing.md` 重写为两个仓库的分工、改文章/改技能流程与常见失败处理。
+
 ## [1.1.0] - 2026-11-11
 
 ### 新增

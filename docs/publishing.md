@@ -1,85 +1,60 @@
-# 发布到 GitHub 与 Pages
+# 仓库分工与发布
 
-本文记录把本仓库发布到 GitHub 并让 Pages 渲染博客的确切步骤。仓库内已备好站点与工作流，网络与认证就绪后按此执行。
+本仓库只承载**技能与模板**。博客站点与文章已迁到独立仓库 [`keyd164.github.io`](https://github.com/keyd164/keyd164.github.io)，两者各自部署、互不牵连。
 
-## 一、前置条件
-
-| 条件 | 说明 |
-|---|---|
-| GitHub 可达 | `git ls-remote https://github.com/git/git.git HEAD` 能返回 HEAD；返回 502 说明出口代理拦截，需换网络 |
-| 认证 | `gh auth login` 成功，或已配置可推送的 SSH key / PAT |
-| 仓库名与可见性 | 建议 `sci-writing-workflow`，公开；Pages 免费版要求公开仓库 |
-
-## 二、创建并推送
-
-```bash
-cd sci-writing-workflow
-
-# 方式 A：gh（推荐，可一并启用 Pages）
-gh repo create sci-writing-workflow --public --source=. --remote=origin --push
-
-# 方式 B：已有远端
-git remote add origin git@github.com:<账号>/sci-writing-workflow.git
-git push -u origin main
-```
-
-仓库默认分支需为 `main`（工作流按 `main` 触发）：
-
-```bash
-git branch -M main
-```
-
-## 三、启用 Pages
-
-```bash
-# 用 Actions 作为 Pages 来源
-gh api -X POST repos/<账号>/sci-writing-workflow/pages \
-  -f source[branch]=main -f source[path]=/ \
-  -f build_type=workflow
-```
-
-或在网页端：Settings → Pages → Build and deployment → Source 选 **GitHub Actions**。
-
-首次推送后 `.github/workflows/pages.yml` 会自动构建 `site/` 并部署。之后访问：
-
-```
-https://<账号>.github.io/sci-writing-workflow/
-```
-
-## 四、仓库内的站点结构
-
-```
-site/
-├─ _config.yml                       # minima 主题、中文语言、永久链接
-├─ index.md                          # 首页：定位、入口指引
-└─ _posts/2026-11-10-....md          # 长文，带 front matter
-.github/workflows/pages.yml          # Jekyll 构建 + Pages 部署
-.github/workflows/verify.yml         # 结构自检与私有痕迹拦截
-scripts/check_repo.py                # 自检脚本
-```
-
-文章正文与 `blog/` 下的长文同源；改文章时两边同步，站点文章的 H1 由布局生成，正文不再重复标题。
-
-## 五、验证
-
-1. Actions 里 `Deploy GitHub Pages` 变绿；
-2. 打开站点首页，长文可从首页进入，代码块与表格正常渲染；
-3. `Verify` 工作流通过，说明技能 frontmatter、12 个模板、站点 front matter 与相对链接均正常。
-
-## 六、常见失败
-
-| 现象 | 原因 | 处理 |
+| 仓库 | 内容 | 地址 |
 |---|---|---|
-| `CONNECT tunnel failed, response 502` | 出口代理拦截 GitHub | 换网络或调整代理白名单 |
-| Pages 404 | 未启用 Pages，或首次部署未完成 | 检查 Settings → Pages 与 Actions 状态 |
-| 文章不出现 | 文章日期在将来，Jekyll 默认不构建未来文章 | 改 `date` 或设置 `future: true` |
-| 中文乱码 | 站点未声明语言或编码 | `_config.yml` 已设 `lang: zh-CN`，检查主题版本 |
+| `sci-writing-workflow`（本仓库） | 19 个技能、12 个登记册模板、文档与自检脚本 | https://github.com/keyd164/sci-writing-workflow |
+| `keyd164.github.io` | Jekyll 站点、文章、RSS、站点地图 | https://keyd164.github.io/ |
 
-## 七、本地预检
+## 为什么分开
+
+项目页地址带仓库名（`…github.io/sci-writing-workflow/`），读起来像代码项目的附属文档；用户站点仓库的根地址没有路径后缀，更接近独立博客。分开之后还有两个实际好处：改文章不再触发技能仓库的检查与部署，改技能也不影响站点；将来绑自定义域名只需在站点仓库改一处。
+
+## 改文章
+
+文章只维护在站点仓库：
+
+1. 在 `keyd164.github.io` 仓库的 `_posts/` 新增 `YYYY-MM-DD-slug.md`，front matter 写 `layout: post`、`title`、`date`
+2. 不要写 `categories`（中文分类会污染 URL），permalink 已统一为 `/posts/:title/`
+3. 提交推送后，`Deploy GitHub Pages` 自动构建部署，约 40 秒生效
+
+## 改技能
+
+只在本仓库改，推送到 `main` 后 `Verify` 会跑结构自检：18 个技能 frontmatter、12 个模板 YAML、仓库边界（不得出现 `site/` 或 `pages.yml`）、相对链接与工作流 YAML。本地可先跑：
 
 ```bash
 python -m pip install pyyaml
 python scripts/check_repo.py
 ```
 
-该脚本检查 18 个技能的 frontmatter、12 个登记册模板的 YAML 与门控一致性、站点文章 front matter、Markdown 相对链接与工作流 YAML，不依赖网络。
+## 首次发布两个仓库
+
+```bash
+# 技能仓库
+git clone https://github.com/keyd164/sci-writing-workflow.git
+cd sci-writing-workflow && python scripts/check_repo.py
+
+# 站点仓库
+git clone https://github.com/keyd164/keyd164.github.io.git
+cd keyd164.github.io
+gh auth login            # 或已配置 GH_TOKEN
+gh api -X PUT repos/keyd164/keyd164.github.io/pages -f build_type=workflow
+gh workflow run pages.yml
+```
+
+站点仓库的 Pages 来源须为 **GitHub Actions**（`build_type=workflow`）。若设成"从分支部署"，GitHub 会用自带 Jekyll 再构建一次，与工作流互相覆盖。
+
+## 常见失败
+
+| 现象 | 原因 | 处理 |
+|---|---|---|
+| 站点 404 | Pages 未启用或首次部署未完成 | 查 Settings → Pages 与 Actions 状态 |
+| 文章不出现 | `date` 在未来，Jekyll 默认跳过 | 改日期，或在 `_config.yml` 设 `future: true` |
+| 站内链接 404 | `baseurl` 与部署路径不一致 | 用户站点仓库保持 `baseurl: ""` |
+| 中文路径 | 写了 `categories` | 删除 categories，用 `/posts/:title/` |
+| 部署与分支构建互覆盖 | `build_type` 仍为 legacy | 改为 `workflow` 后重跑 |
+
+## 旧地址
+
+迁移前的主仓库项目页 `https://keyd164.github.io/sci-writing-workflow/` 仍会继续返回最后一次部署的内容，但不再更新。分发时统一使用 `https://keyd164.github.io/`；确认旧链接无引用后可关闭该仓库的 Pages。

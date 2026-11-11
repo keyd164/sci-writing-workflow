@@ -4,9 +4,9 @@
 
 核心主张：**模型不替你决定科学结论，只负责让每个数字有来源、每句结论有强度、每次修改有痕迹。**
 
-- 仓库：https://github.com/keyd164/sci-writing-workflow
-- 在线站点：https://keyd164.github.io/sci-writing-workflow/
-- 长文：https://keyd164.github.io/sci-writing-workflow/posts/sci-writing-workflow/
+- 仓库（代码）：https://github.com/keyd164/sci-writing-workflow
+- 博客站点：https://keyd164.github.io/
+- 长文：https://keyd164.github.io/posts/sci-writing-workflow/
 
 ## 解决什么问题
 
