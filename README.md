@@ -4,6 +4,10 @@
 
 核心主张：**模型不替你决定科学结论，只负责让每个数字有来源、每句结论有强度、每次修改有痕迹。**
 
+- 仓库：https://github.com/keyd164/sci-writing-workflow
+- 在线站点：https://keyd164.github.io/sci-writing-workflow/
+- 长文：https://keyd164.github.io/sci-writing-workflow/posts/sci-writing-workflow/
+
 ## 解决什么问题
 
 一次性生成整篇论文，问题不在文笔，而在无法定位错误：
@@ -82,7 +86,7 @@ sci-writing-workflow/
 
 ```bash
 # 1. 克隆
-git clone <repo-url> sci-writing-workflow
+git clone https://github.com/keyd164/sci-writing-workflow.git sci-writing-workflow
 
 # 2. 复制技能到你的技能目录（按环境选择实际路径）
 cp -r sci-writing-workflow/skills/* ~/.claude/skills/            # Claude Skills
