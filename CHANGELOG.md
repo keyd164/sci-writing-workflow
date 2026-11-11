@@ -2,6 +2,20 @@
 
 格式参考 Keep a Changelog，版本号遵循语义化版本。
 
+## [1.1.0] - 2026-11-11
+
+### 新增
+
+- `site/`：Jekyll 站点（minima 主题、`lang: zh-CN`），首页与长文文章，供 GitHub Pages 渲染。
+- `.github/workflows/pages.yml`：构建 `site/` 并部署到 GitHub Pages。
+- `.github/workflows/verify.yml`：推送与 PR 时跑结构自检，并拦截私有项目痕迹。
+- `scripts/check_repo.py`：本地结构自检（技能 frontmatter、模板 YAML、站点 front matter、相对链接、工作流 YAML）。
+- `docs/publishing.md`：推送、启用 Pages 的完整步骤与常见失败处理。
+
+### 说明
+
+- 站点文章与仓库外的博客稿同源，正文不含 H1（由布局生成）。
+
 ## [1.0.0] - 2026-11-10
 
 ### 新增
