@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://keyd164.github.io/sci-writing-workflow/sitemap.xml
