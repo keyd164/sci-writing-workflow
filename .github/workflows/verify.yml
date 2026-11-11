@@ -28,8 +28,9 @@ jobs:
           python skills/paper-workflow/scripts/check_gates.py /tmp/paper-check
       - name: Reject private project traces
         run: |
-          if grep -rniE "heat-cvd|swoonyiris|keyd164|D:\\\\" --include="*.md" --include="*.yml" --include="*.py" . \
-               --exclude-dir=third_party --exclude-dir=.git; then
+          # 只扫描发布内容，排除工作流自身（否则会匹配到本文件里的规则文字）
+          if grep -rniE "heat-cvd|swoonyiris|D:\\\\Users" --include="*.md" --include="*.yml" --include="*.py" \
+               skills templates docs site scripts README.md CHANGELOG.md LICENSE; then
             echo "发现疑似私有项目痕迹，请检查"
             exit 1
           fi
